@@ -5,5 +5,6 @@ plugins {
     alias(libs.plugins.kotlinAndroid).apply(false)
     alias(libs.plugins.kotlinMultiplatform).apply(false)
     alias(libs.plugins.kotlinCocoapods).apply(false)
-    id("app.cash.sqldelight").version("2.0.0").apply(false)
+    alias(libs.plugins.sqldelight).apply(false)
+    alias(libs.plugins.buildkonfig).apply(false)
 }

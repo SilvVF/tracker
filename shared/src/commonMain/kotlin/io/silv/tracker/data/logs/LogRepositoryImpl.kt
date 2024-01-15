@@ -1,23 +1,23 @@
 package io.silv.tracker.data.logs
 
+import io.silv.Database
 import io.silv.tracker.data.DatabaseHandler
 import kotlinx.coroutines.flow.Flow
+import kotlinx.datetime.Instant
 
 class LogRepositoryImpl(
   private val databaseHandler: DatabaseHandler
 ) {
 
-  suspend fun insert() {
-    databaseHandler.await(true) {
-      repeat(100) {
-        logsQueries.insert()
-      }
-    }
-  }
-
-  fun subscribeToAll(): Flow<List<Long>> {
-    return databaseHandler.subscribeToList {
-      logsQueries.selectAll()
+  suspend fun insert(
+    logId: String,
+    createdBy: String,
+    instant: Instant,
+    geoPoint: GeoPoint?,
+    synced: Boolean,
+  ) {
+    databaseHandler.await {
+      logsQueries.insert(logId, createdBy, instant, geoPoint?.x, geoPoint?.y, synced)
     }
   }
 }

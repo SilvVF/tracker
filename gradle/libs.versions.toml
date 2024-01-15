@@ -1,12 +1,21 @@
 [versions]
-agp = "8.2.0"
-kotlin = "1.9.20"
+agp = "8.2.1"
+kotlin = "1.9.21"
 compose = "1.5.4"
 compose-compiler = "1.5.4"
+multiplatformSettings = "1.1.1"
 compose-material3 = "1.1.2"
-androidx-activityCompose = "1.8.0"
+androidx-activityCompose = "1.8.2"
+kotlinxCoroutinesCore = "1.8.0-RC2"
+statelyConcurrency = "2.0.5"
 voyager = "1.0.0"
 koin = "3.5.3"
+sqldelight = "2.0.1"
+supabase = "2.0.2"
+ktor = "2.3.7"
+kotlinxDatetime = "0.5.0"
+workmanager = "2.9.0"
+buildkonfig = "0.15.1"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -16,6 +25,11 @@ compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = 
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
 compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
 compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "compose-material3" }
+
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
+kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
+
+stately-concurrency = { module = "co.touchlab:stately-concurrency", version.ref = "statelyConcurrency" }
 
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
 voyager-screenModel = { module = "cafe.adriel.voyager:voyager-screenmodel", version.ref = "voyager" }
@@ -29,9 +43,31 @@ koin-androidx-workmanager = { module = "io.insert-koin:koin-androidx-workmanager
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
 
+
+sqldelight-android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelight" }
+sqldelight-native-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqldelight" }
+sqldelight-extension-coroutines = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqldelight" }
+sqldelight-extension-primitive-adapters = { module = "app.cash.sqldelight:primitive-adapters", version.ref = "sqldelight" }
+
+supabase-gotrue-kt = { module = "io.github.jan-tennert.supabase:gotrue-kt", version.ref = "supabase" }
+supabase-compose-auth = { module = "io.github.jan-tennert.supabase:compose-auth", version.ref = "supabase" }
+supabase-auth-ui = { module = "io.github.jan-tennert.supabase:compose-auth-ui", version.ref = "supabase" }
+
+androidx-work-multiprocess = { module = "androidx.work:work-multiprocess", version.ref = "workmanager" }
+androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "workmanager" }
+
+multiplatform-settings = { module = "com.russhwolf:multiplatform-settings", version.ref = "multiplatformSettings" }
+
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+
+
+
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
+sqldelight = { id = "app.cash.sqldelight" , version.ref = "sqldelight" }
+buildkonfig = { id = "com.codingfeline.buildkonfig" , version.ref = "buildkonfig" }

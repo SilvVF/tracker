@@ -1,8 +1,12 @@
+import com.codingfeline.buildkonfig.compiler.FieldSpec
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.androidLibrary)
-    id("app.cash.sqldelight")
+    alias(libs.plugins.sqldelight)
+    alias(libs.plugins.buildkonfig)
 }
 
 sqldelight {
@@ -10,6 +14,22 @@ sqldelight {
         create("Database") {
             packageName.set("io.silv")
         }
+    }
+}
+
+buildkonfig {
+    packageName = "io.silv.tracker"
+    // objectName = "YourAwesomeConfig"
+    // exposeObjectWithName = "YourAwesomePublicConfig"
+    // Get the API keys from local.properties
+    val properties = Properties().also {
+        it.load(project.rootProject.file("local.properties").inputStream())
+    }
+
+    defaultConfigs {
+        buildConfigField(FieldSpec.Type.STRING, "GOOGLE_WEB_CLIENT_ID", properties.getProperty("GOOGLE_WEB_CLIENT_ID"))
+        buildConfigField(FieldSpec.Type.STRING, "SUPABASE_URL", properties.getProperty("SUPABASE_URL"))
+        buildConfigField(FieldSpec.Type.STRING, "SUPABASE_API_KEY", properties.getProperty("SUPABASE_API_KEY"))
     }
 }
 
@@ -39,19 +59,30 @@ kotlin {
     
     sourceSets {
         androidMain.dependencies {
-            implementation("app.cash.sqldelight:android-driver:2.0.0")
+            implementation(libs.sqldelight.android.driver)
 
             implementation(libs.koin.android)
         }
         nativeMain.dependencies {
-            implementation("app.cash.sqldelight:native-driver:2.0.0")
+            implementation(libs.sqldelight.native.driver)
         }
         commonMain.dependencies {
-            implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0-RC2")
+            implementation(libs.kotlinx.coroutines.core)
             //put your multiplatform dependencies here
-            implementation("co.touchlab:stately-concurrency:2.0.5")
+            implementation(libs.stately.concurrency)
 
-            implementation("app.cash.sqldelight:coroutines-extensions:2.0.0")
+            implementation(libs.sqldelight.extension.coroutines)
+            implementation(libs.sqldelight.extension.primitive.adapters)
+
+            implementation(libs.voyager.koin)
+            implementation(libs.voyager.screenModel)
+            implementation(libs.voyager.navigator)
+            implementation(libs.voyager.tabNavigator)
+            implementation(libs.voyager.transitions)
+
+            implementation(libs.supabase.compose.auth)
+            implementation(libs.supabase.auth.ui)
+            implementation(libs.supabase.gotrue.kt)
 
             implementation(libs.koin.core)
             implementation(libs.koin.test)

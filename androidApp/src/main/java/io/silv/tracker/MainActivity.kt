@@ -24,52 +24,11 @@ import org.koin.android.ext.android.inject
 
 class MainActivity : ComponentActivity() {
 
-    val repo by inject<LogRepositoryImpl>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
 
-            val logs by produceState(initialValue = emptyList<Long>()) {
-                repo.subscribeToAll().collect { value = it }
-            }
-
-            LaunchedEffect(key1 = Unit) {
-                while(true) {
-                    repo.insert()
-                    delay(10000)
-                }
-            }
-
-            MyApplicationTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    GreetingView(logs.size.toString())
-                    LazyColumn(
-                        modifier = Modifier.fillMaxSize()
-                    ) {
-                        items(logs) {
-                            Text(it.toString())
-                        }
-                    }
-                }
-            }
         }
-    }
-}
-
-@Composable
-fun GreetingView(text: String) {
-    Text(text = text, fontSize = 50.sp)
-}
-
-@Preview
-@Composable
-fun DefaultPreview() {
-    MyApplicationTheme {
-        GreetingView("Hello, Android!")
     }
 }

@@ -1,0 +1,9 @@
+CREATE TABLE User(
+    _id TEXT PRIMARY KEY
+);
+
+insert:
+INSERT OR IGNORE INTO User VALUES ?;
+
+selectAll:
+SELECT * FROM User;
