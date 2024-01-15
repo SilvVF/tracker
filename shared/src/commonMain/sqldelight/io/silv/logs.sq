@@ -1,0 +1,9 @@
+CREATE TABLE logs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT
+);
+
+insert:
+INSERT INTO logs(id) VALUES (NULL);
+
+selectAll:
+SELECT * FROM logs;
