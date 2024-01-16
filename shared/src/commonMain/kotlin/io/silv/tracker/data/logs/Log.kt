@@ -7,7 +7,7 @@ data class Log(
     val logId: String,
     val createdBy: String,
     val instant: Instant,
-    val geoPoint: GeoPoint,
+    val geoPoint: GeoPoint?,
     val synced: Boolean,
 )
 

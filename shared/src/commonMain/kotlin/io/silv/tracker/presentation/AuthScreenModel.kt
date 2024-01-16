@@ -8,10 +8,11 @@ import io.silv.tracker.data.network.SupabaseHelper
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 class AuthScreenModel(
     private val auth: Auth
-): StateScreenModel<AuthState>(AuthState()) {
+): StateScreenModel<AuthState>(AuthState(auth.sessionStatus.value)) {
 
     init {
         auth.sessionStatus.onEach { status ->
@@ -21,6 +22,7 @@ class AuthScreenModel(
     }
 }
 
+
 data class AuthState(
-    val status: SessionStatus = SessionStatus.NotAuthenticated
+    val status: SessionStatus
 )

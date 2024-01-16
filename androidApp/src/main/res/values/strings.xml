@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="sign_in_success">signed in</string>
+    <string name="sign_out">sign out</string>
+    <string name="sign_in">sign in</string>
 </resources>

@@ -2,10 +2,12 @@ package io.silv.tracker.presentation.auth
 
 import android.widget.Toast
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
@@ -27,6 +29,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -57,8 +60,11 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 data class AuthActions(
-    val signOut: () -> Unit,
-    val signInWithGoogle: () -> Unit
+    val signOut: () -> Unit = {},
+    val signInWithGoogle: () -> Unit = {},
+    val changePassword: (String) -> Unit = {},
+    val changeEmail: (String) -> Unit = {},
+    val changePhone: (String) -> Unit = {},
 )
 
 class AuthScreen: Screen {
@@ -68,7 +74,7 @@ class AuthScreen: Screen {
 
         val auth = koinInject<ComposeAuth>()
         val screenModel = getScreenModel<AuthScreenModel>()
-        val state by screenModel.state.collectAsState()
+        val state by screenModel.state.collectAsStateWithLifecycle()
         val navigator = LocalNavigator.currentOrThrow
 
         val snackbarHostState = remember { SnackbarHostState() }
@@ -99,12 +105,22 @@ class AuthScreen: Screen {
             }
         )
 
+        var password by rememberSaveable { mutableStateOf("") }
+        var email by rememberSaveable { mutableStateOf("") }
+        var phone by rememberSaveable { mutableStateOf("") }
+
         AuthScreenContent(
             state = state,
             snackbarHostState = snackbarHostState,
+            password = { password },
+            email = { email },
+            phone = { phone },
             actions = AuthActions(
                 signOut = {},
-                signInWithGoogle = signInWithGoogle::startFlow
+                signInWithGoogle = signInWithGoogle::startFlow,
+                changeEmail = { email = it },
+                changePassword = { password = it },
+                changePhone = { phone = it }
             )
         )
     }
@@ -114,6 +130,9 @@ class AuthScreen: Screen {
 @Composable
 fun AuthScreenContent(
     state: AuthState,
+    password: () -> String,
+    email: () -> String,
+    phone: () -> String,
     snackbarHostState: SnackbarHostState,
     actions: AuthActions
 ) {
@@ -121,31 +140,30 @@ fun AuthScreenContent(
         modifier = Modifier
             .fillMaxSize(),
         snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
-    ) {paddingValues ->
+    ) { paddingValues ->
         AuthForm {
-            var password by rememberSaveable { mutableStateOf("") }
-            var email by rememberSaveable { mutableStateOf("") }
-            var phone by rememberSaveable { mutableStateOf("") }
-
             val authState = LocalAuthState.current
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.padding(paddingValues)
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
             ) {
                 OutlinedEmailField(
-                    value = email,
-                    onValueChange = { email = it },
+                    value = email(),
+                    onValueChange = { actions.changeEmail(it) },
                     label = { Text("E-Mail") },
-                    mandatory = email.isNotBlank() //once an email is entered, it is mandatory. (which enable validation)
+                    mandatory = email().isNotBlank() //once an email is entered, it is mandatory. (which enable validation)
                 )
                 OutlinedPhoneField(
-                    value = phone,
-                    onValueChange = { phone = it },
+                    value = phone(),
+                    onValueChange = { actions.changePhone(it) },
                     label = { Text("Phone Number") }
                 )
                 OutlinedPasswordField(
-                    value = password,
-                    onValueChange = { password = it },
+                    value = password(),
+                    onValueChange = {  actions.changePassword(it) },
                     label = { Text("Password") },
                     rules = rememberPasswordRuleList(
                         PasswordRule.minLength(6),
@@ -167,12 +185,14 @@ fun AuthScreenContent(
                     }
                 }
                 Button(
+                    modifier = Modifier.fillMaxWidth(0.6f),
                     onClick = {}, //Login with email and password,
                     enabled = authState.validForm,
                 ) {
                     Text("Login")
                 }
                 OutlinedButton(
+                    modifier = Modifier.fillMaxWidth(0.6f),
                     onClick = {}, //Login with Google,
                     content = { ProviderButtonContent(Google) }
                 )

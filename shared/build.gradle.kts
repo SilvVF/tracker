@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.sqldelight)
     alias(libs.plugins.buildkonfig)
+    alias(libs.plugins.kotlinSerialization)
 }
 
 sqldelight {
@@ -68,7 +69,8 @@ kotlin {
         }
         commonMain.dependencies {
             implementation(libs.kotlinx.coroutines.core)
-            //put your multiplatform dependencies here
+            implementation(libs.kotlinx.serialization.json)
+
             implementation(libs.stately.concurrency)
 
             implementation(libs.sqldelight.extension.coroutines)
@@ -86,6 +88,9 @@ kotlin {
 
             implementation(libs.koin.core)
             implementation(libs.koin.test)
+
+            implementation(libs.ktor.client.cio)
+            implementation(libs.ktor.client.core)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

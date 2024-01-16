@@ -54,6 +54,8 @@ dependencies {
     implementation(libs.compose.ui.graphics)
     implementation(libs.compose.ui.foundation)
     debugImplementation(libs.compose.ui.tooling)
+    implementation(libs.androidx.lifecycle.runtime.compose)
+    implementation(libs.androidx.material.icons.extended.android)
 
     implementation(libs.supabase.compose.auth)
     implementation(libs.supabase.gotrue.kt)
@@ -64,6 +66,7 @@ dependencies {
     implementation(libs.voyager.navigator)
     implementation(libs.voyager.tabNavigator)
     implementation(libs.voyager.transitions)
+
 
     implementation(libs.koin.android)
     implementation(libs.koin.core)

@@ -3,6 +3,7 @@ package io.silv.tracker
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.Surface
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.transitions.FadeTransition
@@ -15,11 +16,13 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        enableEdgeToEdge()
+
         setContent {
             TrackerTheme {
                 Surface {
                     Navigator(
-                        screen = AuthScreen()
+                        screen = HomeScreen()
                     ) {
                         FadeTransition(it)
                     }
