@@ -13,17 +13,17 @@ import io.github.jan.supabase.gotrue.auth
 import io.github.jan.supabase.postgrest.Postgrest
 import io.github.jan.supabase.postgrest.postgrest
 import io.github.jan.supabase.serializer.KotlinXSerializer
-import io.ktor.client.HttpClient
-import io.ktor.client.engine.cio.CIO
 import io.silv.Database
 import io.silv.Logs
 import io.silv.tracker.data.DatabaseHandler
 import io.silv.tracker.data.DatabaseHandlerImpl
 import io.silv.tracker.data.DriverFactory
-import io.silv.tracker.data.logs.GeoPoint
+import io.silv.tracker.data.auth.AuthHandler
 import io.silv.tracker.data.logs.LogRepositoryImpl
+import io.silv.tracker.data.logs.LogsHandler
 import io.silv.tracker.data.network.SupabaseHelper
 import io.silv.tracker.presentation.AuthScreenModel
+import io.silv.tracker.presentation.LogsViewScreenModel
 import kotlinx.datetime.Instant
 import kotlinx.serialization.json.Json
 import org.koin.core.context.startKoin
@@ -83,13 +83,19 @@ val appModule = module {
     )
   }
 
-  single<DatabaseHandler> {
-    DatabaseHandlerImpl(get(), get())
-  }
+    single<DatabaseHandler> {DatabaseHandlerImpl(get(), get()) }
 
-  singleOf(::LogRepositoryImpl)
+    singleOf(::LogRepositoryImpl)
 
-  factoryOf(::AuthScreenModel)
+    factoryOf(::SupabaseHelper)
+
+    factoryOf(::LogsHandler)
+
+    factoryOf(::AuthHandler)
+
+    factoryOf(::AuthScreenModel)
+
+    factoryOf(::LogsViewScreenModel)
 }
 
 expect val platformModule: Module

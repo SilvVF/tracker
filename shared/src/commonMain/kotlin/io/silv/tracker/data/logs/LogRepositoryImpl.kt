@@ -24,4 +24,8 @@ class LogRepositoryImpl(
     fun observeAll(): Flow<List<Log>> {
         return databaseHandler.subscribeToList { logsQueries.selectAll(LogMapper::mapLog) }
     }
+
+    companion object {
+        const val offline_user_name = "offline_user"
+    }
 }

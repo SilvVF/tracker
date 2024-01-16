@@ -11,6 +11,7 @@ androidx-activityCompose = "1.8.2"
 kotlinxCoroutinesCore = "1.8.0-RC2"
 runtime = "1.5.4"
 statelyConcurrency = "2.0.5"
+uuid = "0.8.2"
 voyager = "1.0.0"
 koin = "3.5.3"
 sqldelight = "2.0.1"
@@ -53,6 +54,7 @@ kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serializa
 
 stately-concurrency = { module = "co.touchlab:stately-concurrency", version.ref = "statelyConcurrency" }
 
+uuid = { module = "com.benasher44:uuid", version.ref = "uuid" }
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
 voyager-screenModel = { module = "cafe.adriel.voyager:voyager-screenmodel", version.ref = "voyager" }
 voyager-bottomSheetNavigator = { module = "cafe.adriel.voyager:voyager-bottom-sheet-navigator", version.ref = "voyager" }

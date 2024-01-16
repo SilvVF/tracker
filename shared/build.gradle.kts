@@ -91,6 +91,8 @@ kotlin {
 
             implementation(libs.ktor.client.cio)
             implementation(libs.ktor.client.core)
+
+            implementation(libs.uuid)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

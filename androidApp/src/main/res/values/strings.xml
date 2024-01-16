@@ -3,4 +3,5 @@
     <string name="sign_in_success">signed in</string>
     <string name="sign_out">sign out</string>
     <string name="sign_in">sign in</string>
+    <string name="log_poop">log a poop</string>
 </resources>
