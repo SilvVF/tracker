@@ -7,6 +7,7 @@ import io.github.jan.supabase.gotrue.SessionStatus
 import io.silv.tracker.data.auth.AuthHandler
 import io.silv.tracker.data.logs.Log
 import io.silv.tracker.data.logs.LogsHandler
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
 
@@ -15,6 +16,10 @@ class LogsViewScreenModel(
     private val authHandler: AuthHandler,
     private val logsHandler: LogsHandler
 ): StateScreenModel<LogsViewState>(LogsViewState(status = auth.sessionStatus.value)) {
+
+    fun updateSearch(query: String) {
+        mutableState.update { it.copy(searchQuery = query) }
+    }
 
     fun logout() {
         screenModelScope.launch {
@@ -31,5 +36,6 @@ class LogsViewScreenModel(
 
 data class LogsViewState(
     val status: SessionStatus,
+    val searchQuery: String = "",
     val logsHistory: List<Log> = emptyList()
 )
