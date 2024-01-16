@@ -39,6 +39,9 @@ android {
 }
 
 dependencies {
+
+    implementation(project(":core-ui"))
+
     implementation(projects.shared)
     implementation(libs.koin.core)
     implementation(libs.koin.android)
@@ -46,5 +49,25 @@ dependencies {
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.material3)
     implementation(libs.androidx.activity.compose)
+    implementation(libs.compose.ui.util)
+    implementation(libs.compose.ui.text)
+    implementation(libs.compose.ui.graphics)
+    implementation(libs.compose.ui.foundation)
     debugImplementation(libs.compose.ui.tooling)
+
+    implementation(libs.supabase.compose.auth)
+    implementation(libs.supabase.gotrue.kt)
+    implementation(libs.supabase.auth.ui)
+
+    implementation(libs.voyager.koin)
+    implementation(libs.voyager.screenModel)
+    implementation(libs.voyager.navigator)
+    implementation(libs.voyager.tabNavigator)
+    implementation(libs.voyager.transitions)
+
+    implementation(libs.koin.android)
+    implementation(libs.koin.core)
+    implementation(libs.koin.compose)
+    implementation(libs.koin.androidx.workmanager)
+    testImplementation(libs.koin.test)
 }

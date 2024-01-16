@@ -2,7 +2,12 @@ package io.silv.tracker
 
 import app.cash.sqldelight.ColumnAdapter
 import app.cash.sqldelight.db.SqlDriver
+import io.github.jan.supabase.compose.auth.ComposeAuth
+import io.github.jan.supabase.compose.auth.appleNativeLogin
+import io.github.jan.supabase.compose.auth.googleNativeLogin
 import io.github.jan.supabase.createSupabaseClient
+import io.github.jan.supabase.gotrue.Auth
+import io.github.jan.supabase.postgrest.Postgrest
 import io.github.jan.supabase.serializer.KotlinXSerializer
 import io.silv.Database
 import io.silv.Logs
@@ -25,6 +30,14 @@ val appModule = module {
 
   single {
     createSupabaseClient(BuildKonfig.SUPABASE_URL, BuildKonfig.SUPABASE_API_KEY) {
+
+      install(Auth)
+      install(Postgrest)
+      install(ComposeAuth) {
+        googleNativeLogin(serverClientId = BuildKonfig.GOOGLE_WEB_CLIENT_ID)
+        appleNativeLogin()
+      }
+
       defaultSerializer = KotlinXSerializer(
         Json {
           prettyPrint = true

@@ -80,9 +80,9 @@ kotlin {
             implementation(libs.voyager.tabNavigator)
             implementation(libs.voyager.transitions)
 
-            implementation(libs.supabase.compose.auth)
-            implementation(libs.supabase.auth.ui)
             implementation(libs.supabase.gotrue.kt)
+            implementation(libs.supabase.postgres)
+            implementation(libs.supabase.compose.auth)
 
             implementation(libs.koin.core)
             implementation(libs.koin.test)

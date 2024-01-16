@@ -1,9 +1,9 @@
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 pluginManagement {
     repositories {
-        google()
         gradlePluginPortal()
         mavenCentral()
+        google()
     }
 }
 
@@ -17,3 +17,4 @@ dependencyResolutionManagement {
 rootProject.name = "tracker"
 include(":androidApp")
 include(":shared")
+include(":core-ui")
