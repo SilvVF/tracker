@@ -12,12 +12,10 @@ class TrackerApp: Application() {
   override fun onCreate() {
     super.onCreate()
 
-    initKoinAndroid(
-      listOf(
-        module {
-          single<Context> { this@TrackerApp }
-        }
-      )
-    )
+    initKoinAndroid {
+      androidLogger()
+      androidContext(this@TrackerApp)
+      modules(androidModule)
+    }
   }
 }

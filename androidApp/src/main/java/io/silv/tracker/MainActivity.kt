@@ -12,9 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.twotone.AutoGraph
-import androidx.compose.material.icons.twotone.Home
-import androidx.compose.material.icons.twotone.Map
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -27,24 +24,25 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.util.fastForEach
-import cafe.adriel.voyager.navigator.Navigator
-import cafe.adriel.voyager.navigator.tab.CurrentTab
 import cafe.adriel.voyager.navigator.tab.LocalTabNavigator
 import cafe.adriel.voyager.navigator.tab.TabNavigator
-import cafe.adriel.voyager.transitions.FadeTransition
+import io.silv.core_ui.ActionTab
 import io.silv.core_ui.TrackerTheme
 import io.silv.tracker.android.R
+import io.silv.tracker.domain.base.BasePreferences
 import io.silv.tracker.presentation.graph.GraphTab
 import io.silv.tracker.presentation.home.HomeTab
 import io.silv.tracker.presentation.map.MapTab
+import org.koin.android.ext.android.inject
 
 class MainActivity : ComponentActivity() {
 
+    val basePreferences by inject<BasePreferences>()
+
     @OptIn(ExperimentalLayoutApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
         enableEdgeToEdge()
+        super.onCreate(savedInstanceState)
 
         setContent {
             TrackerTheme {
@@ -112,7 +110,11 @@ fun DefaultBottomAppBar() {
         floatingActionButton = {
             FloatingActionButton(
                 shape = RoundedCornerShape(12),
-                onClick = {  }
+                onClick = {
+                    if (current is ActionTab) {
+                        current.onAddBottomBarClick()
+                    }
+                }
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,

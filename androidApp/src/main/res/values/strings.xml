@@ -5,4 +5,5 @@
     <string name="sign_in">sign in</string>
     <string name="log_poop">log a poop</string>
     <string name="app_name">PooTracker</string>
+    <string name="incognito_mode">incognito mode</string>
 </resources>

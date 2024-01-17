@@ -33,6 +33,7 @@ korge = "5.3.0"
 okio = "3.7.0"
 kotlinIO = "0.3.0"
 unifile = "7c257e1c64"
+datastore = "1.0.0"
 
 [libraries]
 androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycleRuntimeCompose" }
@@ -87,6 +88,9 @@ androidx-work-multiprocess = { module = "androidx.work:work-multiprocess", versi
 androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "workmanager" }
 
 multiplatform-settings = { module = "com.russhwolf:multiplatform-settings", version.ref = "multiplatformSettings" }
+multiplatform-settings-coroutines = { module = "com.russhwolf:multiplatform-settings-coroutines", version.ref = "multiplatformSettings" }
+multiplatform-settings-datastore = { module = "com.russhwolf:multiplatform-settings-datastore", version.ref = "multiplatformSettings" }
+androidx-datastore = { module = "androidx.datastore:datastore-preferences", version.ref = "datastore" }
 
 korge-korio = { module = "korlibs.korio:korio-jvm", version.ref = "korge" }
 okio = { module = "com.squareup.okio:okio", version.ref = "okio" }

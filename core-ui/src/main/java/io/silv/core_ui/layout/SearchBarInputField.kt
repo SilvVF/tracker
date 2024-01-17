@@ -1,4 +1,4 @@
-package io.silv.core_ui
+package io.silv.core_ui.layout
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween

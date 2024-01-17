@@ -65,6 +65,9 @@ kotlin {
             implementation(libs.koin.android)
             implementation(libs.androidx.work.runtime.ktx)
             implementation(libs.androidx.work.multiprocess)
+
+            implementation(libs.multiplatform.settings.datastore)
+            implementation(libs.androidx.datastore)
         }
         nativeMain.dependencies {
             implementation(libs.sqldelight.native.driver)
@@ -90,6 +93,9 @@ kotlin {
             implementation(libs.supabase.storage)
             implementation(libs.supabase.postgres)
             implementation(libs.supabase.compose.auth)
+
+            implementation(libs.multiplatform.settings)
+            implementation(libs.multiplatform.settings.coroutines)
 
             implementation(libs.koin.core)
             implementation(libs.koin.test)

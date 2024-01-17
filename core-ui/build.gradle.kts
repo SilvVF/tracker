@@ -46,6 +46,10 @@ dependencies {
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
 
+    implementation(libs.voyager.navigator)
+    implementation(libs.voyager.transitions)
+    implementation(libs.voyager.tabNavigator)
+
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.material3)

@@ -1,17 +1,21 @@
 package io.silv.tracker.presentation.logs
 
-import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CloudOff
 import androidx.compose.material.icons.filled.Login
 import androidx.compose.material.icons.filled.Logout
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -21,6 +25,9 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
@@ -31,8 +38,8 @@ import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import io.github.jan.supabase.gotrue.SessionStatus
-import io.silv.core_ui.SearchBarInputField
-import io.silv.core_ui.SearchLargeTopBar
+import io.silv.core_ui.layout.SearchBarInputField
+import io.silv.core_ui.layout.SearchLargeTopBar
 import io.silv.tracker.android.R
 import io.silv.tracker.presentation.auth.AuthScreen
 
@@ -123,19 +130,35 @@ fun LogsViewTopBar(
             }
         },
         actions = {
-            AnimatedContent(
-                targetState = status is SessionStatus.Authenticated,
-                label = ""
-            ) { authenticated ->
-                val (icon, action, resId) = if (authenticated) {
-                    Triple(Icons.Filled.Logout, actions.logout, R.string.sign_out)
-                } else {
-                    Triple(Icons.Filled.Login, actions.login, R.string.sign_in)
+
+            var menuVisible by rememberSaveable { mutableStateOf(false) }
+
+            Box {
+                DropdownMenu(
+                    expanded = menuVisible,
+                    onDismissRequest = { menuVisible = false },
+                    modifier = Modifier.widthIn(160.dp)
+                ) {
+                    val (icon, action, resId) = if (status is SessionStatus.Authenticated) {
+                        Triple(Icons.Filled.Logout, actions.logout, R.string.sign_out)
+                    } else {
+                        Triple(Icons.Filled.Login, actions.login, R.string.sign_in)
+                    }
+                    DropdownMenuItem(
+                        text = { Text(stringResource(id = R.string.incognito_mode)) },
+                        onClick = {},
+                        leadingIcon = { Icon(imageVector = Icons.Filled.CloudOff, contentDescription = null) }
+                    )
+                    DropdownMenuItem(
+                        text = { Text(stringResource(id = resId)) },
+                        onClick = action,
+                        leadingIcon = { Icon(imageVector = icon, contentDescription = null) }
+                    )
                 }
-                IconButton(onClick = { action() }) {
+                IconButton(onClick = { menuVisible = !menuVisible }) {
                     Icon(
-                        imageVector = icon,
-                        contentDescription = stringResource(id = resId)
+                        imageVector = Icons.Filled.MoreVert,
+                        contentDescription = null
                     )
                 }
             }

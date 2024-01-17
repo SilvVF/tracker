@@ -4,7 +4,6 @@ package io.silv.tracker.data.upload
 
 import Upload
 import UploadImage
-import com.hippo.unifile.UniFile
 import io.github.jan.supabase.storage.Storage
 import io.github.jan.supabase.storage.UploadStatus
 import io.github.jan.supabase.storage.uploadAsFlow
@@ -18,7 +17,6 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -38,7 +36,7 @@ import kotlin.concurrent.Volatile
 import kotlin.coroutines.cancellation.CancellationException
 
 
-class UploadJob(
+class Uploader(
     private val supabase: SupabaseHelper,
     private val store: UploadStore,
     private val storage: Storage,
@@ -103,7 +101,7 @@ class UploadJob(
 
         isPaused = false
 
-        //UploadWorker.stop()
+        UploadWorker.stop()
     }
 
     /**
@@ -336,7 +334,7 @@ class UploadJob(
         if (logsToQueue.isNotEmpty()) {
             addAllToQueue(logsToQueue)
 
-            //UploadWorker.start()
+            UploadWorker.start()
         }
     }
 

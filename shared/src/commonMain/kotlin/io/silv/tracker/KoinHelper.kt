@@ -1,8 +1,12 @@
+@file:OptIn(ExperimentalSettingsApi::class, ExperimentalSettingsApi::class)
+
 package io.silv.tracker
 
 import app.cash.sqldelight.ColumnAdapter
 import app.cash.sqldelight.db.SqlDriver
+import com.russhwolf.settings.ExperimentalSettingsApi
 import com.russhwolf.settings.Settings
+import com.russhwolf.settings.coroutines.FlowSettings
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.compose.auth.ComposeAuth
 import io.github.jan.supabase.compose.auth.appleNativeLogin
@@ -25,8 +29,12 @@ import io.silv.tracker.data.auth.AuthHandler
 import io.silv.tracker.data.logs.LogRepositoryImpl
 import io.silv.tracker.data.logs.LogsHandler
 import io.silv.tracker.data.network.SupabaseHelper
+import io.silv.tracker.domain.base.BasePreferences
+import io.silv.tracker.domain.base.CommonPreferenceStore
+import io.silv.tracker.domain.base.PreferenceStore
 import kotlinx.datetime.Instant
 import kotlinx.serialization.json.Json
+import org.koin.core.KoinApplication
 import org.koin.core.context.startKoin
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.factoryOf
@@ -99,10 +107,20 @@ val appModule = module {
 
     factoryOf(::AuthHandler)
 
+    single<Settings> { settingsFactory.create("default_app_settings") }
+
+    single<PreferenceStore> { CommonPreferenceStore(get()) }
+
+    single { BasePreferences(get()) }
+
     single<Settings.Factory> { settingsFactory }
+
+    single<FlowSettings> { flowSettings }
 }
 
 expect val settingsFactory: Settings.Factory
+
+expect val flowSettings: FlowSettings
 
 expect val platformModule: Module
 
@@ -110,9 +128,10 @@ internal fun getBaseModules() = appModule + platformModule
 
 
 // in src/commonMain/kotlin
-fun initKoinAndroid(additionalModules: List<Module>) {
+fun initKoinAndroid(config: KoinApplication.() -> Unit) {
     startKoin {
-        modules(additionalModules + getBaseModules())
+        this.config()
+        modules(getBaseModules())
     }
 }
 
