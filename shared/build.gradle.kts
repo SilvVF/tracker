@@ -63,6 +63,8 @@ kotlin {
             implementation(libs.sqldelight.android.driver)
 
             implementation(libs.koin.android)
+            implementation(libs.androidx.work.runtime.ktx)
+            implementation(libs.androidx.work.multiprocess)
         }
         nativeMain.dependencies {
             implementation(libs.sqldelight.native.driver)
@@ -70,6 +72,8 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.kotlinx.serialization.json)
+            implementation(libs.kotlinx.io)
+            implementation(libs.kotlinx.bytestring)
 
             implementation(libs.stately.concurrency)
 
@@ -83,6 +87,7 @@ kotlin {
             implementation(libs.voyager.transitions)
 
             implementation(libs.supabase.gotrue.kt)
+            implementation(libs.supabase.storage)
             implementation(libs.supabase.postgres)
             implementation(libs.supabase.compose.auth)
 

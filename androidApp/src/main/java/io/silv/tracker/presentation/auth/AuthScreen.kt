@@ -47,8 +47,6 @@ import io.github.jan.supabase.compose.auth.ui.password.rememberPasswordRuleList
 import io.github.jan.supabase.compose.auth.ui.phone.OutlinedPhoneField
 import io.github.jan.supabase.gotrue.providers.Google
 import io.silv.tracker.android.R
-import io.silv.tracker.presentation.AuthScreenModel
-import io.silv.tracker.presentation.AuthState
 import io.silv.tracker.presentation.home.HomeTab
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject

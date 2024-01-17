@@ -19,7 +19,7 @@ class LogsHandler(
         if (offline) {
             logsRepository.insert(
                 uuid4().toString(),
-                createdBy = LogRepositoryImpl.offline_user_name,
+                createdBy = null,
                 instant = time,
                 geoPoint = geoPoint,
                 synced = false

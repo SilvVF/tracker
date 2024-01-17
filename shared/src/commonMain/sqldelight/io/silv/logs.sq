@@ -1,23 +1,22 @@
-import io.silv.tracker.data.logs.GeoPoint;
 import kotlin.Boolean;
 import kotlinx.datetime.Instant;
 
 CREATE TABLE logs(
     _id INTEGER PRIMARY KEY NOT NULL,
     log_id TEXT NOT NULL,
-    created_by TEXT NOT NULL,
     instant INTEGER AS Instant NOT NULL,
     location_x INTEGER,
     location_y INTEGER,
     synced INTEGER AS Boolean NOT NULL DEFAULT 0,
+    created_by TEXT,
     FOREIGN KEY (created_by) REFERENCES User(_id) ON DELETE CASCADE
 );
 
 CREATE INDEX logs_log_id ON logs(log_id);
 
 insert:
-INSERT OR REPLACE INTO logs(log_id, created_by, instant, location_x, location_y, synced)
-VALUES (?, ?, ? ,? ,?, ?);
+INSERT OR REPLACE INTO logs(_id, log_id, created_by, instant, location_x, location_y, synced)
+VALUES ( NULL, ?, ?, ? ,? ,?, ?);
 
 selectAll:
 SELECT * FROM logs;

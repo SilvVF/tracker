@@ -7,11 +7,11 @@ object LogMapper {
     fun mapLog(
         id: Long,
         logId: String,
-        createdBy: String,
         createdAt: Instant,
         locationX: Long?,
         locationY: Long?,
-        synced: Boolean
+        synced: Boolean,
+        createdBy: String?
     ) = Log(
         id = id,
         logId = logId,

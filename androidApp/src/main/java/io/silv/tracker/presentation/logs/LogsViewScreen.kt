@@ -34,8 +34,6 @@ import io.github.jan.supabase.gotrue.SessionStatus
 import io.silv.core_ui.SearchBarInputField
 import io.silv.core_ui.SearchLargeTopBar
 import io.silv.tracker.android.R
-import io.silv.tracker.presentation.LogsViewScreenModel
-import io.silv.tracker.presentation.LogsViewState
 import io.silv.tracker.presentation.auth.AuthScreen
 
 class LogsViewScreen: Screen {

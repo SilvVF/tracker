@@ -1,4 +1,4 @@
-package io.silv.tracker.presentation
+package io.silv.tracker.presentation.logs
 
 import cafe.adriel.voyager.core.model.StateScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope

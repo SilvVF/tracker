@@ -11,7 +11,7 @@ class LogRepositoryImpl(
 
     suspend fun insert(
         logId: String,
-        createdBy: String,
+        createdBy: String?,
         instant: Instant,
         geoPoint: GeoPoint?,
         synced: Boolean,
@@ -23,6 +23,14 @@ class LogRepositoryImpl(
 
     fun observeAll(): Flow<List<Log>> {
         return databaseHandler.subscribeToList { logsQueries.selectAll(LogMapper::mapLog) }
+    }
+
+    suspend fun getLogById(id: Long): Log? {
+        return databaseHandler.awaitOneOrNull { logsQueries.selectById(id, LogMapper::mapLog) }
+    }
+
+    fun observeLogById(id: Long): Flow<Log> {
+        return databaseHandler.subscribeToOne { logsQueries.selectById(id, LogMapper::mapLog) }
     }
 
     companion object {

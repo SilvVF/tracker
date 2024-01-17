@@ -29,6 +29,10 @@ appcompat = "1.6.1"
 koin-compose = "3.5.3"
 material = "1.11.0"
 kotlinx-serialization-json = "1.6.0"
+korge = "5.3.0"
+okio = "3.7.0"
+kotlinIO = "0.3.0"
+unifile = "7c257e1c64"
 
 [libraries]
 androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycleRuntimeCompose" }
@@ -77,11 +81,18 @@ supabase-gotrue-kt = { module = "io.github.jan-tennert.supabase:gotrue-kt", vers
 supabase-compose-auth = { module = "io.github.jan-tennert.supabase:compose-auth", version.ref = "supabase" }
 supabase-auth-ui = { module = "io.github.jan-tennert.supabase:compose-auth-ui", version.ref = "supabase" }
 supabase-postgres = { module = "io.github.jan-tennert.supabase:postgrest-kt", version.ref = "supabase" }
+supabase-storage = { module = "io.github.jan-tennert.supabase:storage-kt", version.ref = "supabase" }
 
 androidx-work-multiprocess = { module = "androidx.work:work-multiprocess", version.ref = "workmanager" }
 androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "workmanager" }
 
 multiplatform-settings = { module = "com.russhwolf:multiplatform-settings", version.ref = "multiplatformSettings" }
+
+korge-korio = { module = "korlibs.korio:korio-jvm", version.ref = "korge" }
+okio = { module = "com.squareup.okio:okio", version.ref = "okio" }
+kotlinx-io = { module = "org.jetbrains.kotlinx:kotlinx-io-core", version.ref = "kotlinIO" }
+kotlinx-bytestring = { module = "org.jetbrains.kotlinx:kotlinx-io-bytestring", version.ref = "kotlinIO" }
+unifile = { module = "com.github.tachiyomiorg:unifile", version.ref = "unifile" }
 
 ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }

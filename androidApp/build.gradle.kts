@@ -60,6 +60,8 @@ dependencies {
     implementation(libs.supabase.compose.auth)
     implementation(libs.supabase.gotrue.kt)
     implementation(libs.supabase.auth.ui)
+    implementation(libs.supabase.postgres)
+    implementation(libs.supabase.storage)
 
     implementation(libs.voyager.koin)
     implementation(libs.voyager.screenModel)
@@ -67,6 +69,7 @@ dependencies {
     implementation(libs.voyager.tabNavigator)
     implementation(libs.voyager.transitions)
 
+    implementation(libs.unifile)
 
     implementation(libs.koin.android)
     implementation(libs.koin.core)
