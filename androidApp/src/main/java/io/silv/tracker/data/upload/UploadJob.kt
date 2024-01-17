@@ -103,7 +103,7 @@ class UploadJob(
 
         isPaused = false
 
-        UploadWorker.stop()
+        //UploadWorker.stop()
     }
 
     /**
@@ -336,7 +336,7 @@ class UploadJob(
         if (logsToQueue.isNotEmpty()) {
             addAllToQueue(logsToQueue)
 
-            UploadWorker.start()
+            //UploadWorker.start()
         }
     }
 
